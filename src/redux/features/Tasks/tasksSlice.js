@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   tasks: [],
+  userTasks: [],
 };
 
 const tasksSlice = createSlice({
@@ -26,6 +27,11 @@ const tasksSlice = createSlice({
     updateStatus: (state, { payload }) => {
       const foundItem = state.tasks.find((task) => task.id === payload.id);
       foundItem.status = payload.status;
+    },
+    userTasks: (state, { payload }) => {
+      state.userTasks = state.tasks.filter(
+        (item) => item.assignedTo === payload
+      );
     },
   },
 });
