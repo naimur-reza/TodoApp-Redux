@@ -46,9 +46,9 @@ export const AddTaskModal = ({ isOpen, setIsOpen }) => {
           <option value="low">Low</option>
         </select>
         <div className="flex items-center mt-3 gap-3">
-          <button onClick={() => onCancel()} className="btn btn-danger">
+          <p onClick={() => onCancel()} className="btn btn-danger">
             Cancel
-          </button>
+          </p>
           <button type="submit" className="btn btn-primary">
             Submit
           </button>
