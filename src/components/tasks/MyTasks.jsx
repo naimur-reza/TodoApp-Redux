@@ -3,19 +3,26 @@ import {
   DocumentMagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
 import MyModal from "../ui/Modal/Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PriorityText } from "../shared/PriorityText";
-import { useDispatch } from "react-redux";
-import { updateStatus } from "../../redux/features/Tasks/tasksSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { updateStatus, userTasks } from "../../redux/features/Tasks/tasksSlice";
 
-const MyTasks = ({ myTasks }) => {
+const MyTasks = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
+  const { name: userName } = useSelector((state) => state.userSlice);
+  const { tasks, userTasksArr } = useSelector((state) => state.tasksSlice);
+
+  useEffect(() => {
+    dispatch(userTasks(userName));
+  }, [dispatch, userName, tasks]);
+  console.log(userTasksArr);
   return (
     <div>
       <h1 className="text-xl my-3">My Tasks</h1>
       <div className=" h-[750px] overflow-auto space-y-3">
-        {myTasks.map((item) => (
+        {userTasksArr.map((item) => (
           <div
             key={item.id}
             className="bg-secondary/10 rounded-md p-3 flex justify-between">

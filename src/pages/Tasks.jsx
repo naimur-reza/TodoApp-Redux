@@ -11,7 +11,7 @@ const Tasks = () => {
   const pendingTask = tasks.filter((task) => task.status === "pending");
   const runningTask = tasks.filter((task) => task.status === "running");
   const doneTask = tasks.filter((task) => task.status === "done");
-  const myTask = tasks.filter((task) => task.name === "Naimur Reza");
+
   return (
     <>
       <div className="h-screen grid grid-cols-12">
@@ -125,7 +125,7 @@ const Tasks = () => {
               </div>
             </div>
           </div>
-          <MyTasks myTasks={myTask} />
+          <MyTasks />
         </div>
       </div>
     </>

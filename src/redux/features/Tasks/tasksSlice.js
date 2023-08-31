@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   tasks: [],
-  userTasks: [],
+  userTasksArr: [],
 };
 
 const tasksSlice = createSlice({
@@ -29,11 +29,10 @@ const tasksSlice = createSlice({
       foundItem.status = payload.status;
     },
     userTasks: (state, { payload }) => {
-      state.userTasks = state.tasks.filter(
-        (item) => item.assignedTo === payload
-      );
+      state.userTasksArr = state.tasks.filter((item) => item.name === payload);
     },
   },
 });
-export const { addTask, updateStatus, removeTask } = tasksSlice.actions;
+export const { addTask, updateStatus, removeTask, userTasks } =
+  tasksSlice.actions;
 export default tasksSlice.reducer;
