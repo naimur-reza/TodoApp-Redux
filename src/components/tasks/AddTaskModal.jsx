@@ -1,20 +1,27 @@
-import { useForm } from 'react-hook-form';
-import Modal from '../ui/Modal';
-import { useDispatch } from 'react-redux';
-import { addTask } from '../../redux/features/tasks/tasksSlice';
+import { useForm } from "react-hook-form";
+import Modal from "../ui/Modal";
+import { useAddTaskMutation } from "../../api/baseApi";
+import { toast } from "react-hot-toast";
 
 const AddTaskModal = ({ isOpen, setIsOpen }) => {
   const { register, handleSubmit, reset } = useForm();
-  const dispatch = useDispatch();
-
+  const [addTask] = useAddTaskMutation();
   const onCancel = () => {
     reset();
     setIsOpen(false);
   };
 
-  const onSubmit = (data) => {
-    dispatch(addTask(data));
-    onCancel();
+  const onSubmit = (currentData) => {
+    const data = { ...currentData, status: "pending" };
+    addTask(data)
+      .then(() => {
+        toast.success("Task added");
+        reset();
+        setIsOpen(false);
+      })
+      .catch((err) => {
+        toast.error("Something went wrong");
+      });
   };
 
   return (
@@ -28,7 +35,7 @@ const AddTaskModal = ({ isOpen, setIsOpen }) => {
             className="w-full rounded-md"
             type="text"
             id="title"
-            {...register('title')}
+            {...register("title")}
           />
         </div>
         <div className="flex flex-col mb-5">
@@ -39,7 +46,7 @@ const AddTaskModal = ({ isOpen, setIsOpen }) => {
             className="w-full rounded-md"
             type="text"
             id="description"
-            {...register('description')}
+            {...register("description")}
           />
         </div>
         <div className="flex flex-col mb-5">
@@ -50,7 +57,7 @@ const AddTaskModal = ({ isOpen, setIsOpen }) => {
             className="w-full rounded-md"
             type="date"
             id="date"
-            {...register('date')}
+            {...register("date")}
           />
         </div>
         <div className="flex flex-col mb-5">
@@ -60,8 +67,7 @@ const AddTaskModal = ({ isOpen, setIsOpen }) => {
           <select
             className="w-full rounded-md"
             id="assignedTo"
-            {...register('assignedTo')}
-          >
+            {...register("assignedTo")}>
             <option value="Mir Hussain">Mir Hussain</option>
             <option value="Mezba Abedin">Mezba Abedin</option>
             <option value="Nahid Hasan">Nahid Hasan</option>
@@ -84,8 +90,7 @@ const AddTaskModal = ({ isOpen, setIsOpen }) => {
           <select
             className="w-full rounded-md"
             id="priority"
-            {...register('priority')}
-          >
+            {...register("priority")}>
             <option defaultValue value="high">
               High
             </option>
@@ -97,8 +102,7 @@ const AddTaskModal = ({ isOpen, setIsOpen }) => {
           <button
             onClick={() => onCancel()}
             type="button"
-            className="btn btn-danger "
-          >
+            className="btn btn-danger ">
             Cancel
           </button>
           <button type="submit" className="btn btn-primary ">
