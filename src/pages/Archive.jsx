@@ -4,7 +4,6 @@ import { useGetTasksQuery } from "../redux/tasks/taskApi";
 
 const Archive = () => {
   const { data: tasks } = useGetTasksQuery();
-  console.log(tasks);
 
   const archiveTasks = tasks?.filter((item) => item.status == "archive");
 

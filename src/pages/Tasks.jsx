@@ -5,7 +5,10 @@ import AddTaskModal from "../components/tasks/AddTaskModal";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import MenuDropdown from "../components/ui/MenuDropdown";
-import { useGetTasksQuery } from "../redux/tasks/taskApi";
+import {
+  useDeleteTaskMutation,
+  useGetTasksQuery,
+} from "../redux/tasks/taskApi";
 
 const Tasks = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,6 +23,7 @@ const Tasks = () => {
     refetchOnReconnect: true,
   });
   console.log(tasks);
+  const [deleteTask] = useDeleteTaskMutation();
 
   const pendingTasks = tasks?.filter((item) => item.status == "pending");
   const runningTasks = tasks?.filter((item) => item.status == "running");
