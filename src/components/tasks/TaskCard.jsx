@@ -3,9 +3,9 @@ import {
   removeTask,
   updateStatus,
 } from "../../redux/features/tasks/tasksSlice";
-import { useUpdateStatusMutation } from "../../api/baseApi";
+import { useUpdateStatusMutation } from "../../redux/tasks/taskApi";
 
-const TaskCard = ({ task, refetch }) => {
+const TaskCard = ({ task }) => {
   const [updateStatus] = useUpdateStatusMutation();
 
   let updatedStatus;
@@ -20,7 +20,6 @@ const TaskCard = ({ task, refetch }) => {
 
   const handleUpdate = (id) => {
     updateStatus({ id: id, status: updatedStatus });
-    // refetch();
   };
   return (
     <div className="bg-secondary/10 rounded-md p-5">
