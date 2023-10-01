@@ -13,7 +13,7 @@ const AddTaskModal = ({ isOpen, setIsOpen }) => {
   };
 
   const onSubmit = (currentData) => {
-    const data = { ...currentData, status: "pending" };
+    const data = { ...currentData };
     addTask(data)
       .then(() => {
         toast.success("Task added");
@@ -69,19 +69,11 @@ const AddTaskModal = ({ isOpen, setIsOpen }) => {
             className="w-full rounded-md"
             id="assignedTo"
             {...register("assignedTo")}>
-            <option value="Mir Hussain">Mir Hussain</option>
-            <option value="Mezba Abedin">Mezba Abedin</option>
-            <option value="Nahid Hasan">Nahid Hasan</option>
-            <option value="Mizanur Rahman">Mizanur Rahman</option>
-            <option value="Tanmoy Parvez">Tanmoy Parvez</option>
-            <option value="Fahim Ahmed Firoz">Fahim Ahmed Firoz</option>
-            <option value="Rahatul Islam">Rahatul Islam</option>
-            <option value="Samin Israr Ravi">Samin Israr Ravi</option>
-            <option value="Mehedi Anik">Mehedi Anik</option>
-            <option value="Ehtisam Haq">Ehtisam Haq</option>
-            <option value="Anisur Rahman">Anisur Rahman</option>
-            <option value="Muktadir Hasan">Muktadir Hasan</option>
-            <option value="Masud Alam">Masud Alam</option>
+            <option value="Mir Hussain">Naimur Reza</option>
+            <option value="Mezba Abedin">Ali Akbar</option>
+            <option value="Nahid Hasan">Miraz Ali</option>
+            <option value="Mizanur Rahman">Rakin Ahsan</option>
+            <option value="Tanmoy Parvez">Abdul Bashir</option>
           </select>
         </div>
         <div className="flex flex-col mb-5">
